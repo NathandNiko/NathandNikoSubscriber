@@ -9,45 +9,51 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
-      background-color: #000;
-      color: #fff;
+      background-color: #1e1e1e; /* Dark gray background */
       font-family: Arial, sans-serif;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      color: white;
     }
+
     .card {
-      background-color: #1a1a1a;
+      background-color: #2b2b2b; /* Slightly lighter card */
       border-radius: 20px;
       padding: 40px 20px 30px;
       text-align: center;
       position: relative;
-      width: 300px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      width: 320px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     }
+
     .profile-pic {
       width: 100px;
       height: 100px;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid #1a1a1a;
+      border: 4px solid #2b2b2b;
       position: absolute;
       top: -50px;
       left: 50%;
       transform: translateX(-50%);
-      background-color: #000;
+      background-color: #1e1e1e;
     }
+
     .channel-name {
       margin-top: 60px;
       font-size: 1.5em;
       font-weight: bold;
     }
-    .sub-count {
-      margin-top: 10px;
-      font-size: 1.2em;
-      color: #ccc;
+
+    .sub-frame {
+      margin-top: 15px;
+      width: 100%;
+      height: 130px;
+      border: none;
     }
   </style>
 </head>
@@ -56,28 +62,11 @@
   <div class="card">
     <img class="profile-pic" src="https://yt3.ggpht.com/xjiT9ctSowSNBbEMvA0jzd_OvMYuOXDjAW2HQTNaoD3loctUFRguZ21vc6d_Lf7zws2XtxWVAH8=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="Channel Profile">
     <div class="channel-name">Nath and Niko</div>
-    <div class="sub-count" id="subCount">Loading...</div>
+    <iframe class="sub-frame"
+      src="https://socialcounts.org/youtube-live-subscriber-count/UCxltERhQ5U2rE6mVwAKFmZw/embed"
+      allowfullscreen>
+    </iframe>
   </div>
-
-  <script>
-    const API_KEY = 'AIzaSyBepUuZLUAhg2dXsB7wk_xhxDKNcHzyLYE';
-    const CHANNEL_ID = 'UCxltERhQ5U2rE6mVwAKFmZw';
-
-    async function fetchSubscribers() {
-      try {
-        const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}`);
-        const data = await response.json();
-        const count = data.items[0].statistics.subscriberCount;
-        document.getElementById('subCount').textContent = `${Number(count).toLocaleString()} subscribers`;
-      } catch (error) {
-        document.getElementById('subCount').textContent = 'Error fetching data';
-        console.error(error);
-      }
-    }
-
-    fetchSubscribers();
-    setInterval(fetchSubscribers, 1000);
-  </script>
 
 </body>
 </html>
